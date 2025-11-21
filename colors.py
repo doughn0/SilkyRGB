@@ -4,16 +4,19 @@ from copy import copy
 
 SMOOTH = 0.15
 
+def color_255ize(c:Color):
+    return [round(x*255)/255 for x in c]
+
 class Palette():
     def __init__(self, bg:Color, fg:Color|None=None) -> None:
-        self.bg = bg
-        self._bg = bg
+        self.bg = color_255ize(bg)
+        self._bg = color_255ize(bg)
         if fg is None:
-            self.fg = bg
-            self._fg = bg
+            self.fg = color_255ize(bg)
+            self._fg = color_255ize(bg)
         else:
-            self.fg = fg
-            self._fg = fg
+            self.fg = color_255ize(fg)
+            self._fg = color_255ize(fg)
 
     def __eq__(self, p2) -> bool:
         return \
@@ -52,84 +55,77 @@ BLACK = Palette([0,0,0])
 colors = {
     # Original Set
     'Cyan': [0.0, 0.7843, 0.7843],
-    'Aqua': [0.1961, 0.549, 0.8627],
+    'Aqua': [0.1, 0.6, 0.92],
     'Magenta': [1.0, 0.0, 0.7059],
     'Green': [0.0, 1.0, 0.0],
     'Blue': [0.0, 0.1961, 1.0],
-    'PBlue': [0.0, 0.0, 1.0],         # Pure Blue
-    'Mint': [0.0, 1.0, 0.4706],
+    'PBlue': [0.0, 0.0, 1.0],
     'Violet': [0.2941, 0.0, 1.0],
-    'Orange': [1.0, 0.2353, 0.0],
     'Yellow': [1.0, 0.7843, 0.0],
-    'Gold': [1.0, 0.498, 0.0],
+    'Gold': [1.0, 0.75, 0.0],
     'Silver': [0.8, 0.8, 0.9],
     'Red': [1.0, 0.0196, 0.0],
-    'PRed': [1.0, 0.0, 0.0],          # Pure Red
-    'Pink': [1.0, 0.1961, 0.3922],
+    'PRed': [1.0, 0.0, 0.0],
+    'Pink': [1.0, 0.4, 0.6],
     'White': [1.0, 1.0, 1.0],
-    'Black': [0.0, 0.0, 0.0],         # Same as Off
+    'Black': [0.0, 0.0, 0.0],
 
     # Second Set
-    'Electric Blue': [0.0, 0.498, 1.0],
+    'Electric Blue': [0.0, 0.7, 1.0],
     'Sky Blue': [0.5294, 0.8078, 0.9216],
-    'Turquoise': [0.251, 0.8784, 0.8157],
+    'Mint': [0.4, 0.8784, 0.7],
     'Teal': [0.0, 0.502, 0.502], # really low brightness
-    'Deep Purple': [0.5412, 0.1686, 0.8863],
+    'Deep Purple': [0.5412, 0.0, 0.8863],
     'Hot Pink': [1.0, 0.4118, 0.7059],
-    'Amethyst': [0.6, 0.4, 0.8],
+    'Amethyst': [0.6, 0.5, 0.7],
     'Fuchsia': [1.0, 0.0, 1.0],
     'Lime Green': [0.1961, 0.8039, 0.1961],
-    'Emerald': [0.0, 0.5882, 0.2941],
     'Spring Green': [0.0, 1.0, 0.498],
-    'Crimson': [0.8627, 0.0784, 0.2353],
     'Tangerine': [1.0, 0.5098, 0.0],
     'Scarlet': [1.0, 0.1373, 0.0],
     'Goldenrod': [0.8549, 0.6471, 0.1255],
     'Warm White': [1.0, 0.9608, 0.902],
     'Ice White': [0.902, 0.9804, 1.0],
     'Knulli': [0.65, 1, 0],
-    'Off': [0.0, 0.0, 0.0]              # Same as Black
+    'Off': [0.0, 0.0, 0.0]
 }
 
 PALETTES = {
-    # Warm & Fiery
-    'Flame': ['Red', 'Orange'],
+    # Red Coded
     'Sunset': ['Hot Pink', 'Tangerine'],
-    'Volcano': ['PRed', 'Black'],
-    'Crimson Gold': ['Crimson', 'Gold'],
-    'Golden Hour': ['Goldenrod', 'Warm White'],
-    #probably merge flame and crimson gold
+    'Flame': ['Red', 'Yellow'],
+    'Medal': ['Silver', 'Gold'],
 
-    # Cool & Serene
-    'Ocean Deep': ['Blue', 'Teal'],
-    'Glacier': ['White', 'Cyan'],
-    'Amethyst Haze': ['Amethyst', 'Deep Purple'], # small diff
-    'Lagoon': ['Turquoise', 'Spring Green'],
-    'Night Sky': ['PBlue', 'Silver'], #cool dark palette
+    # Blue Coded
+    'Arctic': ['White', 'Cyan'],
+    'Ocean': ['Blue', 'Cyan'],
+    'Mint': ['Electric Blue', 'Spring Green'],
+    'Gender Reveal Party': ['Aqua', 'Pink'],
 
-    # Vibrant & Electric
-    'Cyberpunk': ['Magenta', 'Cyan'],
-    'Synthwave': ['Electric Blue', 'Hot Pink'],
-    'Matrix': ['Lime Green', 'Black'],
-    'Fuchsia Flash': ['Fuchsia', 'Electric Blue'], #probably redundant
-    'Scarlet Surge': ['Scarlet', 'Aqua'],
+    #'Synthwave': ['Hot Pink', 'Electric Blue'],
+    #'Fuchsia Flash': ['Fuchsia', 'Electric Blue'], #probably redundant
+    #'Scarlet Surge': ['Scarlet', 'Aqua'],
 
-    # Natural & Earthy
+    # Green Coded
     'Knulli': ['Knulli', 'Silver'],
+    'Knulli2': ['Knulli', 'Lime Green'],
     'Spring Meadow': ['Spring Green', 'Yellow'],
-    'Mint Chip': ['Mint', 'Silver'],
-    'Orchid': ['Magenta', 'Violet'],
     
     # Fun & Sweet
-    'Cotton Candy': ['Pink', 'Sky Blue'],
-    'Lemon Lime': ['Lime Green', 'Yellow'], #basically spling meadow
-    'Bubblegum': ['Pink', 'Aqua'], # there are a few like this
-    'Tangerine Dream': ['Tangerine', 'White'],
+    #'Cotton Candy': ['Pink', 'Sky Blue'],
+    #'Bubblegum': ['Pink', 'Aqua'], # there are a few like this
     
-    # Regal & Rich
-    'Royalty': ['Violet', 'Gold'],
-    'Emerald City': ['Emerald', 'Goldenrod'],
-    'Prestige': ['Deep Purple', 'Silver']
+    # Vibrant
+    'Orchid': ['Magenta', 'Violet'],
+    'Cyberpunk': ['Fuchsia', 'Cyan'],
+    'Toxic': ['Fuchsia', 'Green'],
+    'Royal': ['Violet', 'Gold'],
+
+    # Haze
+    #'Mint': ['Silver', 'Mint'],
+    'Blue Haze': ['Sky Blue', 'PBlue'], #cool dark palette
+    'Purple Haze': ['Amethyst', 'Deep Purple'], # small diff
+    'Fuchsia Haze': ['Amethyst', 'Fuchsia'], # small diff
 }
 
 def get_palette(S:str) -> list[Color]:

@@ -165,8 +165,9 @@ class RGBState:
 
         if not self._idle:
             conf_done = self.smooth_conf()
-            if conf_done:
+            if conf_done and not self._idle:
                 self._idle = True
+                print('[render] Entered IDLE')
             #print("Idle", self._idle)
 
         #print("cd:", conf_done, "id:", self._idle, "br:", int(self.DEV.BR*100))

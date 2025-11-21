@@ -52,6 +52,7 @@ def wrapper():
             main()
         except Exception as e:
             print(e.with_traceback(None))
+        sleep(0.2)
 
 if False:
     main()

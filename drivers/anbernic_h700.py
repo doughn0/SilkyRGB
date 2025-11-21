@@ -43,13 +43,18 @@ class RGBDriver:
         # c_oflag: output modes
         attrs[1] &= ~termios.OPOST
         # c_cflag: control modes
-        attrs[2] &= ~(termios.CSIZE | termios.PARENB)
+        attrs[2] &= ~(termios.CSIZE | termios.PARENB | termios.CRTSCTS)
         attrs[2] |= termios.CS8
         # c_lflag: local modes
         attrs[3] &= ~(termios.ECHO | termios.ECHONL | termios.ICANON | termios.ISIG | termios.IEXTEN)
 
         # Set new attributes immediately
         termios.tcsetattr(self.rgb_serial, termios.TCSANOW, attrs)
+
+        check_attrs = termios.tcgetattr(self.rgb_serial)
+        ispeed = check_attrs[4]
+        ospeed = check_attrs[5]
+        #print(f"Requested: {BAUD_RATE}, Actual Input: {ispeed}, Actual Output: {ospeed}")
 
         os.write(self.rgb_serial,  b"\x01\xFF\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00")
         
@@ -64,7 +69,9 @@ class RGBDriver:
     
     def write(self, bytes:bytes):
         os.write(self.rgb_serial, bytes)
-        termios.tcdrain(self.rgb_serial) # pyright: ignore[reportAttributeAccessIssue]
+        #print(len(bytes))
+        sleep(0.01)
+        #termios.tcdrain(self.rgb_serial) # pyright: ignore[reportAttributeAccessIssue]
     
     def close(self) -> None:        
         os.close(self.rgb_serial)

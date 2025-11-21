@@ -96,59 +96,63 @@ def battery():
     last_state = STATE.DEV.BATTERY['state']
     cur_state = req[1]
 
-    print(f"[bat] [{last_pct}/{last_state}] -> [{cur_pct}/{cur_state}]")
+    if cur_state != last_state and cur_pct != last_pct:
 
-    if CONFIG['battery.charging'] == 'notification' and cur_state != last_state: # notification mode
-        if cur_state == 'Charging':
-            run_preset_effect('battery_charging')
-        if cur_state == 'Full':
-            run_preset_effect('battery_full')
-        if cur_state == 'Discharging':
-            if STATE.DEV.BATTERY['percentage'] < 5:
-                run_preset_effect('battery_discharging1')
-            elif STATE.DEV.BATTERY['percentage'] < 50:
-                run_preset_effect('battery_discharging2')
-            else:
-                run_preset_effect('battery_discharging3')
-        STATE.events.append(Event(EventType.RemoveLayer, 'charging'))
-    elif CONFIG['battery.charging'] == 'continuous' and cur_state != last_state:
-        if cur_state != last_state:
+        print(f"[bat] [{last_pct}/{last_state}] -> [{cur_pct}/{cur_state}]")
+
+        if CONFIG['battery.charging'] == 'notification' and cur_state != last_state: # notification mode
             if cur_state == 'Charging':
-                STATE.events.append(Event(EventType.AddLayer, 'charging'))
-            else:
-                STATE.events.append(Event(EventType.RemoveLayer, 'charging'))
-    elif cur_state != last_state:
-        STATE.events.append(Event(EventType.RemoveLayer, 'charging'))
+                run_preset_effect('battery_charging')
+            if cur_state == 'Full':
+                run_preset_effect('battery_full')
+            if cur_state == 'Discharging':
+                if STATE.DEV.BATTERY['percentage'] < 5:
+                    run_preset_effect('battery_discharging1')
+                elif STATE.DEV.BATTERY['percentage'] < 50:
+                    run_preset_effect('battery_discharging2')
+                else:
+                    run_preset_effect('battery_discharging3')
+            STATE.events.append(Event(EventType.RemoveLayer, 'charging'))
+        elif CONFIG['battery.charging'] == 'continuous' and cur_state != last_state:
+            if cur_state != last_state:
+                if cur_state == 'Charging':
+                    STATE.events.append(Event(EventType.AddLayer, 'charging'))
+                else:
+                    STATE.events.append(Event(EventType.RemoveLayer, 'charging'))
+        elif cur_state != last_state:
+            STATE.events.append(Event(EventType.RemoveLayer, 'charging'))
 
-    if CONFIG['battery.low'] == 'notification' and cur_state == 'Discharging' and cur_pct != last_pct:
-        if cur_pct <= thresh_pct:
-            run_preset_effect('battery_low1')
-        elif cur_pct <= 5:
-            run_preset_effect('battery_low2')
-    elif CONFIG['battery.low'] == 'continuous' and cur_state == 'Discharging' and (cur_pct != last_pct or cur_state != last_state):
-        if cur_pct <= thresh_pct:
-            STATE.events.append(Event(EventType.AddLayer, 'bat_low'))
-    elif cur_state != 'Discharging' or cur_pct > thresh_pct:
-        STATE.events.append(Event(EventType.RemoveLayer, 'bat_low'))
+        if CONFIG['battery.low'] == 'notification' and cur_state == 'Discharging' and cur_pct != last_pct:
+            if cur_pct <= thresh_pct:
+                run_preset_effect('battery_low1')
+            elif cur_pct <= 5:
+                run_preset_effect('battery_low2')
+        elif CONFIG['battery.low'] == 'continuous' and cur_state == 'Discharging' and (cur_pct != last_pct or cur_state != last_state):
+            if cur_pct <= thresh_pct:
+                STATE.events.append(Event(EventType.AddLayer, 'bat_low'))
+        elif cur_state != 'Discharging' or cur_pct > thresh_pct:
+            STATE.events.append(Event(EventType.RemoveLayer, 'bat_low'))
 
-    STATE.DEV.BATTERY['state'] = cur_state
-    STATE.DEV.BATTERY['percentage'] = cur_pct
+        STATE.DEV.BATTERY['state'] = cur_state
+        STATE.DEV.BATTERY['percentage'] = cur_pct
 
 @route("/update-screen-state", method='POST')
 def screen():
     req = request.body.read().decode() # pyright: ignore[reportAttributeAccessIssue]
 
-    if CONFIG['adaptive_brightness']:
+    if CONFIG['brightness.adaptive']:
         if(STATE._target_sc != int(req)):
-            STATE._target_sc = int(req)
+            cur_sc = min(int((int(req)/255 * 100)), 100)
+            print(f"[screen] [{STATE._target_sc}] -> [{cur_sc}]")
+            STATE._target_sc = cur_sc
             STATE.DEV.nuke_savestates()
             STATE._idle = False
 
 @get("/kill")
 def kill():
     STATE.events.append(Event(EventType.FadeOut))
-    #STATE.events.append(Event(EventType.Notification, 'blink_on', 1, WHITE))
-    #STATE.events.append(Event(EventType.Notification, 'round_back', 1, WHITE))
+    STATE.events.append(Event(EventType.Notification, 'blink_on', 1, WHITE))
+    STATE.events.append(Event(EventType.Notification, 'round_back', 1, WHITE))
     STATE.events.append(Event(EventType.Die))
 
 @get("/get-settings")
