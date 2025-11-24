@@ -1,9 +1,11 @@
-# The Smoothest light effects in the Handheld World™ [WIP]
+# SilkyRGB
+#### The Smoothest light effects in the Handheld World™ [WIP]
 
-RGB Manager Daemon that completely takes over control of all RGB led on supported devices.
+RGB Manager Daemon that completely takes over control of all RGB leds on supported devices.
 
 #### Highlights and features:
  * Silky Smooth effects, transitions and animations
+ * Unique effects available for different RGB layouts
  * Refined Colors and Palettes
  * Configuration API
  * Notification API for battery warnings and system feedback
