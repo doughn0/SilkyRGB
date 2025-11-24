@@ -1,61 +1,59 @@
-# The best RGB controller for retro handheld devices (WIP)
+# The Smoothest light effects in the Handheld World™ [WIP]
 
-Currently planning to support:
+RGB Manager Daemon that completely takes over control of all RGB led on supported devices.
+
+#### Highlights and features:
+ * Silky Smooth effects, transitions and animations
+ * Refined Colors and Palettes
+ * Configuration API
+ * Notification API for battery warnings and system feedback
+ * Input based effects
+ * Low resource use (1-5% on one core, 20MB RAM)
+
+#### Supported OS:
+ * Knulli Alpha
+
+#### Supported Devices:
  * all Anbernic H700 devices with RGB
- * A133P devices: TrimUI Smart Pro and Brick
+ * A133P devices: TrimUI Smart Pro
 
-### Available Options:
- * Modes (list)
- * Brightness
- * Adaptive Brightness
- * Palette (list)
-   * Custom palette colors (either 2 rgb sliders, or 2 color lists)
- * Palette Swap
- * Split Palette (on devices that have secondary zones, like a second stick)
- * RA integration - not handled by the RGB Daemon
- * Battery Notifications (on, off, constant)
+#### WIP Devices:
+ * A133P: Trimui Brick
+ * SD865: Retroid Pocket 5
 
 ### API Endpoints
 
-Default URL is `http://localhost:1235/` and the following endpoints are available:
+Base URL: `http://localhost:1235`
 
-#### `reload-config/` payload:`option_key`
+#### Configuration
 
-Reloads the entire config and applies the changes, if `option_key` is specified, only that one option is reloaded.
+* **GET** `/reload-config`: Forces the controller to reload and apply settings from the configuration file.  
+* **POST** `/set-config`: Sets a single configuration option.  
+  * Payload: `[key] [value]` (e.g., `brightness.max 100`)  
+* **GET** `/get-settings`: Retrieves all available configuration settings metadata.
 
-#### `run-animation/` payload:`animation_list`
+#### Light Control & Discovery
 
-Runs animations specified in the payload, can be one or more, separated by `;`:
- * Preset: Preset calls contain premade animation lists
-  * `battery_charging`
-  * `battery_low`
-  * `battery_full`
-  * `cheevo`
- * Manual animation list:
-  * `up green` - runs `up` with RGB(0,255,0) color
-  * `blink #ff00ff 3` - runs `blink` 3 times in magenta
-A full payload might look like: `blink green; battery_low; blink #ff00ff 3`
+This section handles triggering effects and discovering available animations/colors.
 
-#### `update-battery-state/` payload:`percentage state`
+* **POST** `/animation`: Triggers a sequence of effects, wrapped in smooth fade-in/out.  
+  * Payload: Semicolon-separated commands (e.g., `cheevo; blink 2 #FF00FF`)  
+  * Command Formats:  
+    1. Preset: `[preset_name]` (e.g., `battery_charging`)  
+    2. Custom Noti: `[notification_name] [count] [hex_color]`  
+* **GET** `/get-modes˙`: Retrieves available continuous animation modes.  
+* **GET** `/get-animations`: Retrieves available temporary notification effects.  
+* **GET** `/get-palettes`: Retrieves available named color palettes.
 
-Updates the battery state the daemon is aware of in an event driven way, percentage is a number 0-100, state is `Charging`|`Full`|`Discharging`
+#### Device Status Updates
 
-#### `update-screen-state/` payload:`percentage`
+These endpoints push status changes from the handheld system to the controller.
 
-Updates the screen brightness state for adaptive brightness, takes a number 0-100
+* **POST** `/update-battery-state`: Updates battery percentage and charging state, triggering alerts based on config.  
+  * Payload: `[percentage] [state]` (e.g., `75 Discharging`)  
+* **POST** `/update-screen-state`: Updates screen brightness for adaptive lighting control.  
+  * Payload: `[brightness_value`] (Integer `0-255`)
 
-#### `get-animations/`
+#### System Management
 
-Returns the list of available animations in a json with all metadata
-
-#### `get-modes/`
-
-Returns the list of supported modes and metadata in a json
-
-#### `get-palettes/`
-
-Returns the list of available palettes in a json list
-
-#### `get-options/`
-
-Returns the list of available option keys and supported values where applicable based on the capabilities of the device.
+* **GET** `/kill`: Triggers a final system shutdown animation and terminates the daemon.
