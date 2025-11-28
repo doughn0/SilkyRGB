@@ -96,7 +96,7 @@ def battery():
     last_state = STATE.DEV.BATTERY['state']
     cur_state = req[1]
 
-    if cur_state != last_state and cur_pct != last_pct:
+    if cur_state != last_state or cur_pct != last_pct:
 
         print(f"[bat] [{last_pct}/{last_state}] -> [{cur_pct}/{cur_state}]")
 
@@ -151,8 +151,8 @@ def screen():
 @get("/kill")
 def kill():
     STATE.events.append(Event(EventType.FadeOut))
-    STATE.events.append(Event(EventType.Notification, 'blink_on', 1, WHITE))
-    STATE.events.append(Event(EventType.Notification, 'round_back', 1, WHITE))
+    #STATE.events.append(Event(EventType.Notification, 'blink_on', 1, WHITE))
+    #STATE.events.append(Event(EventType.Notification, 'round_back', 1, WHITE))
     STATE.events.append(Event(EventType.Die))
 
 @get("/get-settings")

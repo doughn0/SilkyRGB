@@ -1,6 +1,6 @@
 from enum import Enum
 import json
-from colors import BLUE, GREEN, RED, WHITE, PALETTES, Palette, get_palette
+from colors import BLACK, BLUE, GREEN, RED, WHITE, PALETTES, Palette, get_palette
 from device import Device
 from effects.effect_store import MODES, NOTIS, STATES
 from effects._base_effect import BaseEffect
@@ -38,8 +38,9 @@ class RGBState:
             #Event(EventType.RunEffect, 'up', 1, RED),
             #Event(EventType.RunEffect, 'up', 1, GREEN),
             #Event(EventType.RunEffect, 'up', 1, BLUE),
-            Event(EventType.Notification, 'round', 1, WHITE),
-            Event(EventType.Notification, 'blink_off', 1, WHITE),
+            #Event(EventType.Notification, 'round', 1, WHITE),
+            #Event(EventType.Notification, 'blink_off', 1, WHITE),
+            Event(EventType.Notification, 'frame', 1, BLACK),
             Event(EventType.FadeIn)
         ]
     

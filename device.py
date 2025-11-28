@@ -34,6 +34,7 @@ class Device:
         }
 
         self.TRAITS = []
+        self.TRAITS.append('device:'+identify_device())
 
         self.nuke_savestates()
     
