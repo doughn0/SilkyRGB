@@ -4,7 +4,7 @@ from colors import BLACK, BLUE, GREEN, RED, WHITE, PALETTES, Palette, get_palett
 from device import Device
 from effects.effect_store import MODES, NOTIS, STATES
 from effects._base_effect import BaseEffect
-from utilities import generate_brightness_list
+from utilities import mix
 from confloader import CONFIG, read_config_knulli
 
 read_config_knulli()
@@ -202,13 +202,19 @@ class RGBState:
 
         raw_palette = get_palette('-'.join(PALETTES[CONFIG['palette']]))
         self._target_palette = [Palette(*raw_palette), Palette(*raw_palette)]
-        if CONFIG['palette.swap']:
+        if CONFIG['palette.invert']:
             self._target_palette = [p.swap() for p in self._target_palette]
-        if CONFIG['palette.swap.secondary']:
+        if CONFIG['palette.invert.secondary']:
             self._target_palette[1] = self._target_palette[1].swap()
-        if CONFIG['palette.stealth']:
+        if CONFIG['palette.mod'] == 'twilight':
             self._target_palette[0].bg = [.0,.0,.0]
             self._target_palette[1].bg = [.0,.0,.0]
+        if CONFIG['palette.mod'] == 'sparkle':
+            self._target_palette[0].fg = mix([1.0,1.0,1.0], 0.7, self._target_palette[0].bg, 0.3)
+            self._target_palette[1].fg = mix([1.0,1.0,1.0], 0.7, self._target_palette[1].bg, 0.3)
+        if CONFIG['palette.mod'] == 'haze':
+            self._target_palette[0].bg = mix([.7,.7,.7], 0.7, self._target_palette[0].fg, 0.2)
+            self._target_palette[1].bg = mix([.7,.7,.7], 0.7, self._target_palette[1].fg, 0.2)
         if not CONFIG['brightness.adaptive']:
             self._target_sc = MAX_BR
     

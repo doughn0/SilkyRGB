@@ -10,9 +10,9 @@ CONFIG = {
     "brightness": 7,
     "brightness.adaptive": False,
     "palette": "Knulli",
-    "palette.swap": False,
-    "palette.stealth": False,
-    "palette.swap.secondary": False,
+    "palette.mod": 'none',
+    "palette.invert": False,
+    "palette.invert.secondary": False,
     "retroachievements": True,
     "battery.low": "notification",
     "battery.low.threshold": 20,
@@ -33,13 +33,14 @@ conf_map = {
     "palette": {
         "type": "string"
     },
-    "palette.swap": {
+    "palette.mod": {
+        "type": "enum",
+        "values": ["none", "twilight", "sparkle", "haze"]
+    },
+    "palette.invert": {
         "type": "bool"
     },
-    "palette.stealth": {
-        "type": "bool"
-    },
-    "palette.swap.secondary": {
+    "palette.invert.secondary": {
         "type": "bool",
         "reqs": ['has_secondary']
     },
@@ -92,14 +93,15 @@ def set_option(key:str, val:str):
         if key == "brightness.adaptive":
             CONFIG["brightness.adaptive"] = val == '1'
 
-        if key == "palette.swap":
-            CONFIG["palette.swap"] = val == '1'
+        if key == "palette.invert":
+            CONFIG["palette.invert"] = val == '1'
 
-        if key == "palette.stealth":
-            CONFIG["palette.stealth"] = val == '1'
+        if key == "palette.mod":
+            if val in conf_map['palette.mod']['values']:
+                CONFIG["palette.mod"] = val
 
-        if key == "palette.swap.secondary":
-            CONFIG["palette.swap.secondary"] = val == '1'
+        if key == "palette.invert.secondary":
+            CONFIG["palette.invert.secondary"] = val == '1'
 
         if key == "battery.charging":
             if val in conf_map['battery.charging']['values']:
