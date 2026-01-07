@@ -54,13 +54,17 @@ def wrapper():
             print(e.with_traceback(None))
         sleep(0.2)
 
-if False:
-    main()
-else:
-    t1 = threading.Thread(target=wrapper)
-    t2 = threading.Thread(target=run_api, daemon=True)
+def launch():
+    if False:
+        main()
+    else:
+        t1 = threading.Thread(target=wrapper)
+        t2 = threading.Thread(target=run_api, daemon=True)
 
-    t1.start()
-    sleep(1)
-    print('\n')
-    t2.start()
+        t1.start()
+        sleep(1)
+        print('\n')
+        t2.start()
+
+if __name__ == '__main__':
+    launch()
