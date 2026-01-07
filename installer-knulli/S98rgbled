@@ -18,7 +18,7 @@ case "$1" in
   restart)
     # Code in here will only be executed on shutdown.
     curl -s "http://localhost:1235/kill"
-    sleep 2
+    sleep 1
     cd /userdata/roms/tools/hh-prime-rgb
     nohup python rgb_daemon.py &>/userdata/rgbled.log &
     ;;
