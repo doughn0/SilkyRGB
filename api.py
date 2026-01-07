@@ -1,9 +1,9 @@
-from bottle import run, route, get, request
-from colors import AMBER, BLUE, GREEN, PALETTES, RED, WHITE, Palette
-from confloader import CONFIG, conf_map, read_config_knulli, set_option
-from effects.effect_store import MODES, NOTIS
-from state import RGBState, Event, EventType
-from utilities import Color, hex_to_rgb
+from .bottle import run, route, get, request
+from .colors import AMBER, BLUE, GREEN, PALETTES, RED, WHITE, Palette
+from .confloader import CONFIG, conf_map, read_config_knulli, set_option
+from .effects.effect_store import MODES, NOTIS
+from .state import RGBState, Event, EventType
+from .utilities import Color, hex_to_rgb
 from copy import deepcopy
 from json import dumps
 

@@ -1,6 +1,6 @@
-from effects._base_effect import BaseEffect
-from device import Device
-from utilities import dimm, easeOutQuart
+from ...effects._base_effect import BaseEffect
+from ...device import Device
+from ...utilities import dimm, easeOutQuart
 
 _metadata = {
     'name': 'Notification Round Back',

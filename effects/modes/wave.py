@@ -1,6 +1,6 @@
-from effects._base_effect import BaseEffect
-from device import Device
-from utilities import mix, dimm, sin100
+from ...effects._base_effect import BaseEffect
+from ...device import Device
+from ...utilities import mix, dimm, sin100
 
 _metadata = {
     'name': 'Wave',

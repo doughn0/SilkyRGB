@@ -1,5 +1,5 @@
 
-from utilities import mix, Numeric, Color
+from .utilities import mix, Numeric, Color
 from copy import copy
 
 SMOOTH = 0.15

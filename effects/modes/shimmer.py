@@ -1,7 +1,7 @@
 from random import randint
-from effects._base_effect import BaseEffect
-from device import Device
-from utilities import dimm, mix, sin100
+from ...effects._base_effect import BaseEffect
+from ...device import Device
+from ...utilities import dimm, mix, sin100
 
 _metadata = {
     'name': 'Shimmer',

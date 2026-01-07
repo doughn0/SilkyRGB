@@ -1,5 +1,5 @@
-from effects._base_effect import BaseEffect
-from device import Device
+from ...effects._base_effect import BaseEffect
+from ...device import Device
 from random import randint
 
 _metadata = {

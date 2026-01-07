@@ -1,8 +1,8 @@
 import os
 import re
 
-from colors import PALETTES, get_palette
-from effects.effect_store import MODES
+from .colors import PALETTES, get_palette
+from .effects.effect_store import MODES
 
 CONFIG = {
     "fps": 30,

@@ -1,7 +1,7 @@
 from math import pi, sin
-from effects._base_effect import BaseEffect
-from device import Device
-from utilities import mix, dimm, sin100, sin100_
+from ...effects._base_effect import BaseEffect
+from ...device import Device
+from ...utilities import mix, dimm, sin100, sin100_
 
 _metadata = {
     'name': 'Knight Rider',

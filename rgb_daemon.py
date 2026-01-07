@@ -1,7 +1,7 @@
 from time import time_ns, sleep
 import threading
-from api import run_api
-from state import RGBState
+from .api import run_api
+from .state import RGBState
 
 TICK = 0
 STATE = RGBState.get()

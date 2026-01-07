@@ -1,6 +1,6 @@
-from effects._base_effect import BaseEffect
-from device import Device
-from utilities import color_upscale, hsv_fl
+from ...effects._base_effect import BaseEffect
+from ...device import Device
+from ...utilities import color_upscale, hsv_fl
 
 _metadata = {
     'name': 'Rainbow',
