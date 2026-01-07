@@ -13,7 +13,7 @@ def identify_device():
 
     return board
 
-config = json.load(open('device_configs/'+identify_device()+'.json'))
+config = json.load(open(os.path.dirname(__file__)+'/device_configs/'+identify_device()+'.json'))
 
 RGBDriver = import_module("drivers."+config['driver']).RGBDriver
 
