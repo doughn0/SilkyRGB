@@ -1,5 +1,0 @@
-#!/bin/bash
-
-DAEMON_CURL_URL="http://localhost:1235"
-
-curl -s "$DAEMON_CURL_URL/reload-config"

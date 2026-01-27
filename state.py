@@ -1,11 +1,11 @@
 from enum import Enum
 import json
-from colors import BLACK, BLUE, GREEN, RED, WHITE, PALETTES, Palette, get_palette
-from device import Device
-from effects.effect_store import MODES, NOTIS, STATES
-from effects._base_effect import BaseEffect
-from utilities import mix
-from confloader import CONFIG, read_config_knulli
+from .colors import BLACK, BLUE, GREEN, RED, WHITE, PALETTES, Palette, get_palette
+from .device import Device
+from .effects.effect_store import MODES, NOTIS, STATES
+from .effects._base_effect import BaseEffect
+from .utilities import mix
+from .confloader import CONFIG, read_config_knulli
 
 read_config_knulli()
 

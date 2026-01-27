@@ -1,5 +1,5 @@
 
-from utilities import mix, Numeric, Color
+from .utilities import mix, Numeric, Color
 from copy import copy
 
 SMOOTH = 0.15
@@ -107,8 +107,8 @@ PALETTES = {
     #'Scarlet Surge': ['Scarlet', 'Aqua'],
 
     # Green Coded
-    'Knulli': ['Knulli', 'Silver'],
-    'Knulli2': ['Knulli', 'Lime Green'],
+    'Knulli': ['Knulli', 'Lime Green'],
+    'Knulli Silver': ['Knulli', 'Silver'],
     'Spring Meadow': ['Spring Green', 'Yellow'],
     
     # Fun & Sweet

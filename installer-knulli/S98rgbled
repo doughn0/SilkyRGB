@@ -8,8 +8,7 @@ fi
 case "$1" in
   start)
   # Code in here will only be executed on start.
-    cd /userdata/roms/tools/hh-prime-rgb
-    nohup python rgb_daemon.py &>/userdata/rgbled.log &
+    nohup knulli-rgb &>/userdata/system/logs/rgbled.log &
     ;;
   stop)
     # Code in here will only be executed on shutdown.
@@ -18,9 +17,8 @@ case "$1" in
   restart)
     # Code in here will only be executed on shutdown.
     curl -s "http://localhost:1235/kill"
-    sleep 2
-    cd /userdata/roms/tools/hh-prime-rgb
-    nohup python rgb_daemon.py &>/userdata/rgbled.log &
+    sleep 1
+    nohup knulli-rgb &>/userdata/system/logs/rgbled.log &
     ;;
   *)
     # Code in here will be executed in all other conditions.

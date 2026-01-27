@@ -1,6 +1,6 @@
-from effects._base_effect import BaseEffect
-from device import Device
-from utilities import generate_brightness_list, loop_d, dimm
+from ...effects._base_effect import BaseEffect
+from ...device import Device
+from ...utilities import generate_brightness_list, loop_d, dimm
 
 _metadata = {
     'name': 'frame',

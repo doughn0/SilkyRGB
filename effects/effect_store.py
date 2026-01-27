@@ -10,7 +10,7 @@ MODES = {}
 for f in os.listdir(dirname):
     if f[0] != '_' and os.path.isfile("%s/%s" % (dirname, f)) and f[-3:] == ".py":
         name = f.replace('.py','')
-        effect_module = import_module("effects.modes."+name)
+        effect_module = import_module("silkyrgb.effects.modes."+name)
         MODES[name] = {
             'metadata': effect_module._metadata,
             'class': effect_module.Effect
@@ -26,7 +26,7 @@ NOTIS = {}
 for f in os.listdir(dirname):
     if f[0] != '_' and os.path.isfile("%s/%s" % (dirname, f)) and f[-3:] == ".py":
         name = f.replace('.py','')
-        effect_module = import_module("effects.notifications."+name)
+        effect_module = import_module("silkyrgb.effects.notifications."+name)
         NOTIS[name] = {
             'metadata': effect_module._metadata,
             'class': effect_module.Effect
@@ -42,7 +42,7 @@ STATES = {}
 for f in os.listdir(dirname):
     if f[0] != '_' and os.path.isfile("%s/%s" % (dirname, f)) and f[-3:] == ".py":
         name = f.replace('.py','')
-        effect_module = import_module("effects.states."+name)
+        effect_module = import_module("silkyrgb.effects.states."+name)
         STATES[name] = {
             'metadata': effect_module._metadata,
             'class': effect_module.Effect

@@ -1,5 +1,5 @@
-from colors import Palette
-from device import Device
+from ..colors import Palette
+from ..device import Device
 from typing import Hashable
 
 class BaseEffect:

@@ -4,7 +4,7 @@ from time import sleep
 from math import sqrt, atan2, degrees
 from functools import lru_cache
 from copy import deepcopy
-from utilities import loop_d
+from .utilities import loop_d
 
 JS_EVENT_FORMAT = 'IhBB'
 JS_EVENT_SIZE = struct.calcsize(JS_EVENT_FORMAT)

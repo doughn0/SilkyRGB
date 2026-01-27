@@ -1,7 +1,7 @@
-from colors import RED, AMBER
-from effects._base_effect import BaseEffect
-from device import Device
-from utilities import dimm, easeOutQuart, mix, sin100, sin100_
+from ...colors import RED, AMBER
+from ...effects._base_effect import BaseEffect
+from ...device import Device
+from ...utilities import dimm, easeOutQuart, mix, sin100, sin100_
 
 _metadata = {
     'name': 'Battery Low',
