@@ -7,7 +7,7 @@ from .effects.effect_store import MODES
 CONFIG = {
     "fps": 30,
     "mode": "shimmer",
-    "brightness": 7,
+    "brightness": 70,
     "brightness.adaptive": False,
     "palette": "Knulli",
     "palette.mod": 'none',
@@ -25,7 +25,7 @@ conf_map = {
     },
     "brightness": {
         "type": "int",
-        "range": [0,10]
+        "range": [0,100]
     },
     "brightness.adaptive": {
         "type": "bool"

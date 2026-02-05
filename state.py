@@ -198,7 +198,7 @@ class RGBState:
             self.events.append(Event(EventType.FadeIn))
             self._mode = CONFIG['mode']
 
-        self._target_br = 40 + int(CONFIG['brightness']*10 * 0.6) 
+        self._target_br = 40 + int(CONFIG['brightness'] * 0.6) 
 
         raw_palette = get_palette('-'.join(PALETTES[CONFIG['palette']]))
         self._target_palette = [Palette(*raw_palette), Palette(*raw_palette)]

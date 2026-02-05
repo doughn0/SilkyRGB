@@ -139,12 +139,19 @@ def battery():
 @route("/update-screen-state", method='POST')
 def screen():
     req = request.body.read().decode() # pyright: ignore[reportAttributeAccessIssue]
+    
+    try:
+        # Clamp value between 0 and 100 immediately
+        cur_pct = max(0, min(int(req), 100))
+    except ValueError:
+        print("[screen] Error: Received invalid integer payload")
+        return
 
     if CONFIG['brightness.adaptive']:
-        if(STATE._target_sc != int(req)):
-            cur_sc = min(int((int(req)/255 * 100)), 100)
-            print(f"[screen] [{STATE._target_sc}] -> [{cur_sc}]")
-            STATE._target_sc = cur_sc
+        # Use the cleaned variable for the comparison
+        if STATE._target_sc != cur_pct:
+            print(f"[screen] [{STATE._target_sc}] -> [{cur_pct}]")
+            STATE._target_sc = cur_pct
             STATE.DEV.nuke_savestates()
             STATE._idle = False
 
