@@ -7,16 +7,16 @@ from .effects.effect_store import MODES
 CONFIG = {
     "fps": 30,
     "mode": "shimmer",
-    "brightness": 70,
+    "brightness": 100,
     "brightness.adaptive": False,
     "palette": "Knulli",
     "palette.mod": 'none',
     "palette.invert": False,
     "palette.invert.secondary": False,
     "retroachievements": True,
-    "battery.low": "notification",
+    "battery.low": "continuous",
     "battery.low.threshold": 20,
-    "battery.charging": "notification",
+    "battery.charging": "continuous",
 }
 
 conf_map = {
