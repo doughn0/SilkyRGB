@@ -11,19 +11,19 @@ STATE = RGBState.get()
 
 presets = {
     'battery_charging': [
-        Event(EventType.Notification, 'up', 3, GREEN),
+        Event(EventType.Notification, 'pulse', 3, GREEN),
     ],
     'battery_discharging1': [
-        Event(EventType.Notification, 'down', 1, RED),
+        Event(EventType.Notification, 'pulse_back', 1, RED),
     ],
     'battery_discharging2': [
-        Event(EventType.Notification, 'down', 1, Palette([1,0.7,0])),
+        Event(EventType.Notification, 'pulse_back', 1, Palette([1,0.7,0])),
     ],
     'battery_discharging3': [
-        Event(EventType.Notification, 'down', 1, GREEN),
+        Event(EventType.Notification, 'pulse_back', 1, GREEN),
     ],
     'battery_full': [
-        Event(EventType.Notification, 'up', 1, GREEN),
+        Event(EventType.Notification, 'pulse', 1, GREEN),
         Event(EventType.Notification, 'round', 1, GREEN),
         Event(EventType.Notification, 'blink_off', 1, GREEN),
     ],

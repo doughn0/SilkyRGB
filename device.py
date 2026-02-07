@@ -142,7 +142,8 @@ class RawZone:
         self.COUNT = zone_config['leds']
         self.PAL_ID = zone_config.get('secondary', 0)
         self.COUNT_2_F = self.COUNT // 2
-        self.COUNT_2_C = self.COUNT // 2 + 1
+        self.COUNT_2_C = (self.COUNT + 1) // 2
+        self.POS = zone_config.get('pos', [0, 0])
     
     def all(self, c) -> None:
         for index in self._ind: 
