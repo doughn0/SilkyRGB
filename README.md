@@ -54,7 +54,7 @@ These endpoints push status changes from the handheld system to the controller.
 * **POST** `/update-battery-state`: Updates battery percentage and charging state, triggering alerts based on config.  
   * Payload: `[percentage] [state]` (e.g., `75 Discharging`)  
 * **POST** `/update-screen-state`: Updates screen brightness for adaptive lighting control.  
-  * Payload: `[brightness_value`] (Integer `0-255`)
+  * Payload: `[brightness_value`] (Integer `0-100`)
 
 #### System Management
 
