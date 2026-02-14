@@ -1,6 +1,6 @@
+from .._base_effect import BaseEffect
 from math import sqrt
 from ...colors import Color
-from ...effects._base_effect import BaseEffect
 from ...device import Device
 from ...utilities import Numeric, dimm, easeOutQuart, generate_brightness_list, mix
 

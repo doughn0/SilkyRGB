@@ -1,4 +1,4 @@
-from ...effects._base_effect import BaseEffect
+from .._base_effect import BaseEffect
 from ...device import Device
 from ...joystick import StickState
 from ...utilities import loop_d, mix, dimm
