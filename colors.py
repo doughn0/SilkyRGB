@@ -86,7 +86,9 @@ colors = {
     'Goldenrod': [0.8549, 0.6471, 0.1255],
     'Warm White': [1.0, 0.9608, 0.902],
     'Ice White': [0.902, 0.9804, 1.0],
-    'Knulli': [0.65, 1, 0],
+    'Knulli Light Green': [0.43, 1.0, 0.0],
+    'Knulli Dark Green': [0.08, 0.47, 0.02],
+
     'Off': [0.0, 0.0, 0.0]
 }
 
@@ -107,8 +109,8 @@ PALETTES = {
     #'Scarlet Surge': ['Scarlet', 'Aqua'],
 
     # Green Coded
-    'Knulli': ['Knulli', 'Lime Green'],
-    'Knulli Silver': ['Knulli', 'Silver'],
+    'Knulli': ['Knulli Dark Green', 'Knulli Light Green'],
+    'Knulli Silver': ['Knulli Light Green', 'Silver'],
     'Spring Meadow': ['Spring Green', 'Yellow'],
     
     # Fun & Sweet
