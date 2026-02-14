@@ -3,6 +3,7 @@ from ...device import Device
 from ...utilities import mix, dimm, sin100
 
 _metadata = {
+    'order': 100,
     'name': 'Zone Test',
     'reqs': ['dev']
 }

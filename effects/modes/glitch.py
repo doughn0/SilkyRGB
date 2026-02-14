@@ -3,6 +3,7 @@ from ...device import Device
 from random import randint
 
 _metadata = {
+    'order': 40,
     'name': 'Glitch',
     'reqs': []
 }

@@ -4,6 +4,7 @@ from ...joystick import StickState
 from ...utilities import loop_d, mix, dimm
 
 _metadata = {
+    'order': 31,
     'name': 'Input Pulse',
     'reqs': ['has_input']
 }

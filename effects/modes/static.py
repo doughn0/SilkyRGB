@@ -2,6 +2,7 @@ from .._base_effect import BaseEffect
 from ...device import Device
 
 _metadata = {
+    'order': 0,
     'name': 'Static',
     'reqs': []
 }

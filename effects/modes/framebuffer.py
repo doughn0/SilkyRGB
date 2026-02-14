@@ -3,6 +3,7 @@ from ...device import Device
 import os
 
 _metadata = {
+    'order': 50,
     'name': 'Screen Aura',
     'reqs': ['dev']
 }
